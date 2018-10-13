@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import { Button } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 class App extends Component {
 
@@ -23,23 +23,49 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <p>
-            Welcome to Pilehaus!
-          </p>
-          {this.state.isBedtime ? 
+      <Container fluid className="App-header">
+        <Row style={{backgroundColor: "blue"}}>
+          <Col>
+            <p>
+              Welcome to Pilehaus!
+            </p>
+          </Col>
+          <Col>
+            <p>
+              Make yourself at home :)
+            </p>
+          </Col>
+        </Row>
+        <Row style={{backgroundColor: "green"}}>
+        {this.state.isBedtime ? 
+          <p style={{color: "red"}}>{`IT'S PAST BEDTIME!!`}</p>
+          :
+          <p>{`Currently it just shows the time:`}</p>
+        }
 
-              <p style={{color: "red"}}>{`IT'S PAST BEDTIME!!`}</p>
-              :
-              <p>{`Currently it just shows the time:`}</p>
-          }
+        <div style={this.state.isBedtime ? {color: "red"} : {}}>
+        {this.state.currentTime}
+        </div>
 
-          <div style={this.state.isBedtime ? {color: "red"} : {}}>
-            {this.state.currentTime}
-          </div>
-        </header>
-      </div>
+        </Row>
+      </Container>
+      // <div className="App">
+      //   <header className="App-header">
+          // <p>
+          //   Welcome to Pilehaus!
+          // </p>
+          // {this.state.isBedtime ? 
+
+          //     <p style={{color: "red"}}>{`IT'S PAST BEDTIME!!`}</p>
+          //     :
+          //     <p>{`Currently it just shows the time:`}</p>
+          // }
+
+          // <div style={this.state.isBedtime ? {color: "red"} : {}}>
+          //   {this.state.currentTime}
+          // </div>
+      //   </header>
+      // </div>
     );
   }
 
