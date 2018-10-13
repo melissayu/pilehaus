@@ -1,27 +1,56 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentTime: new Date().toLocaleTimeString(),
+      isBedtime: false,
+    };
+  }
+
+
+  componentDidMount(){
+    this.setTime();
+    window.setInterval(function () {
+     this.setTime();
+   }.bind(this), 1000);
+  };
+
   render() {
     return (
       <div className="App">
         <header className="App-header">
-          {/* <img src={logo} className="App-logo" alt="logo" /> */}
           <p>
-            Pilehaus app!
+            Welcome to Pilehaus!
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+          {this.state.isBedtime ? 
+
+              <p style={{color: "red"}}>{`IT'S PAST BEDTIME!!`}</p>
+              :
+              <p>{`Currently it just shows the time:`}</p>
+          }
+
+          <div style={this.state.isBedtime ? {color: "red"} : {}}>
+            {this.state.currentTime}
+          </div>
         </header>
       </div>
     );
+  }
+
+  setTime() {
+    const now = new Date();
+    const hours = now.getHours();
+    this.setState({currentTime: now.toLocaleTimeString()})
+    if (hours > 22 || hours < 5) {
+      this.setState({isBedtime: true})
+    } else {
+      this.setState({isBedtime: false})
+    }
   }
 }
 
